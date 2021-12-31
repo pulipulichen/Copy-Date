@@ -1,10 +1,7 @@
-#include <File.au3>
-#include <MsgBoxConstants.au3>
-#include <FileConstants.au3>
-#include <WinAPIFiles.au3>
-#include <Array.au3>
+#include <Date.au3>
 
-$ParentDir = StringLeft(@scriptDir,StringInStr(@scriptDir,"\",0,-1)-1)
-$CMD = "npm run yyyymmdd-hhmmss"
-Run(@ComSpec & " /c " & $CMD, $ParentDir, @SW_HIDE)
-#RunWait(@ComSpec & " /c " & $CMD, $ParentDir, @SW_SHOW)
+Func FormatDate()
+    return stringregexpreplace(_NowCalcDate() , "(\d\d\d\d)/(\d\d)/(\d\d)" , "$1$3$2") & "-" & stringreplace(_NowTime(5) , ":" , "") & " "
+EndFunc
+
+ClipPut(FormatDate())
